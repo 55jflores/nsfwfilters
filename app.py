@@ -10,7 +10,11 @@ from fastapi.responses import JSONResponse
 from PIL import Image
 from transformers import pipeline
 
-app = FastAPI()
+app = FastAPI(
+    title="NSFW Image Moderation API",
+    description="A simple API to moderate uploaded images for NSFW content using a Hugging Face model.",
+    version="1.0.0",
+)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
