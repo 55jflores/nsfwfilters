@@ -4,12 +4,21 @@ from typing import List, Optional
 from pydantic import BaseModel
 
 from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from PIL import Image
 from transformers import pipeline
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 classifier = pipeline(
     "image-classification",
     model="Falconsai/nsfw_image_detection",
